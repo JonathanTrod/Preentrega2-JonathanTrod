@@ -1,29 +1,37 @@
 import { useState, useEffect } from "react";
-import { getProducts } from "../../asyncmock";
+import { getProducts, getProductsByCategory } from "../../asyncmock";
+import { Link, useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
+
+  const { categoryId } = useParams();
+
   useEffect(() => {
-    getProducts()
+    const asynFunction = categoryId ? getProductsByCategory : getProducts;
+
+    asynFunction(categoryId)
       .then((res) => {
         setProducts(res);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [categoryId]);
 
   return (
     <div>
       <h1>{greeting}</h1>
-      {products.map((prod) => {
-        return (
-          <div>
-            <h3>{prod.name}</h3>
-            <buttom>ver detalle</buttom>
-          </div>
-        );
-      })}
+      <div>
+        {products.map((prod) => {
+          return (
+            <div key={prod.id}>
+              <h3>{prod.name}</h3>
+              <Link to={"/item/${prod.id"}>ver detalle</Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
