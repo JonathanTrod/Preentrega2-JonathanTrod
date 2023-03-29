@@ -4,7 +4,7 @@ const products = [
     name: "picada especial",
     price: 2000,
     category: "tablas",
-    img: "/components/img/picada4.jpg",
+    img: "../components/assents/img/picada4.jpg",
     stock: 22,
     description: "Descripcion de picada",
   },

@@ -8,7 +8,7 @@ const ItemCount = ({ stock, onAdd }) => {
 
   return (
     <div>
-      <h2>0</h2>
+      <h2>{count}</h2>
       <button onClick={decrement}>Decrementar</button>
       <button onClick={increment}>Incrementar</button>
       <button onClick={() => onAdd(count)} disabled={stock === 0}>
