@@ -1,37 +1,42 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getProducts, getProductsByCategory } from "../../asyncmock";
-import { Link, useParams } from "react-router-dom";
+import ItemList from "../ItemList/ItemList";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
-  const [products, setProducts] = useState([]);
+  const [productsState, setProductsState] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { categoryId } = useParams();
 
   useEffect(() => {
-    const asynFunction = categoryId ? getProductsByCategory : getProducts;
+    setLoading(true);
+    const asyncFunction = categoryId ? getProductsByCategory : getProducts;
 
-    asynFunction(categoryId)
-      .then((res) => {
-        setProducts(res);
+    asyncFunction(categoryId)
+      .then((products) => {
+        setProductsState(products);
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [categoryId]);
+
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
+
+  if (productsState && productsState.length === 0) {
+    return <h1>No hay productos</h1>;
+  }
 
   return (
     <div>
       <h1>{greeting}</h1>
-      <div>
-        {products.map((prod) => {
-          return (
-            <div key={prod.id}>
-              <h3>{prod.name}</h3>
-              <Link to={"/item/${prod.id"}>ver detalle</Link>
-            </div>
-          );
-        })}
-      </div>
+      <ItemList products={productsState} />
     </div>
   );
 };

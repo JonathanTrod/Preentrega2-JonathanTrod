@@ -1,24 +1,16 @@
 import ItemCount from "../ItemCount/ItemCount";
 
-const ItemDetail = ({ id, name, img, price, stock, description }) => {
-  const handleOnAdd = (quantity) => {
-    const objProduct = {
-      id,
-      name,
-      price,
-      quantity,
-    };
-    console.log(objProduct);
-  };
+const ItemDetail = ({ name, price, img, description }) => {
   return (
-    <div>
-      <h2>{name}</h2>
-      <img src={img} alt={name} />
-      <p>Precio: ${price}</p>
-      <p>Stock: {stock}</p>
-      <p>Descripcion: {description}</p>
-      <ItemCount stock={stock} onAdd={handleOnAdd} />
-    </div>
+    <>
+      <div style={{ background: "pink", margin: 10 }}>
+        <h2>{name}</h2>
+        <img src={img} alt={name} style={{ width: 100 }} />
+        <h3>precio: {price}</h3>
+        <p>descripcion: {description}</p>
+      </div>
+      <ItemCount />
+    </>
   );
 };
 

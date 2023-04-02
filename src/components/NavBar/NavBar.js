@@ -6,11 +6,26 @@ const NavBar = () => {
     <nav className="NavBar">
       <h1>EL Secreto</h1>
       <div>
-        <Link to="category/tablas">Picadas Especiales</Link>
-        <button>Ofertas</button>
-        <button>Bebidas</button>
-        <CartWidget />
+        <Link
+          to="/category/Especial"
+          className={({ isActive }) => (isActive ? "ActiveLink" : "Link")}
+        >
+          Especial
+        </Link>
+        <Link
+          to="/category/Super"
+          className={({ isActive }) => (isActive ? "ActiveLink" : "Link")}
+        >
+          Super
+        </Link>
+        <Link
+          to="/category/Comun"
+          className={({ isActive }) => (isActive ? "ActiveLink" : "Link")}
+        >
+          Comun
+        </Link>
       </div>
+      <CartWidget />
     </nav>
   );
 };

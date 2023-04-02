@@ -2,4 +2,12 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: aqua;
+}
+.ActiveLink {
+  background-color: orange;
+}
+
+.Link {
+  background-color: yellow;
 }
